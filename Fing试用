@@ -1,8 +1,0 @@
-﻿Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\bam\State\UserSettings\S-1-5-21-4089296320-3957585748-49806261-500]
-"\\Device\\HarddiskVolume2\\Program Files\\Fing\\Fing.exe"=hex:b9,78,26,c8,3e,\
-  07,d8,01,00,00,00,00,00,00,00,00,00,00,00,00,02,00,00,00
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-4089296320-3957585748-49806261-500]
-"\\Device\\HarddiskVolume2\\Program Files\\Fing\\Fing.exe"=hex:b9,78,26,c8,3e,\
-  07,d8,01,00,00,00,00,00,00,00,00,00,00,00,00,02,00,00,00
