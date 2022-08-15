@@ -1,0 +1,123 @@
+port: 7890
+socks-port: 7890
+redir-port: 7890
+mixed-port: 7890
+mode: rule
+allow-lan: true
+bind-address: "*"
+log-level: silent
+ipv6: false
+external-controller: 0.0.0.0:9090
+dns:
+  enable: true
+  listen: 127.0.0.1:8853
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 1.0.0.1
+    - 8.8.4.4
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*.lan"
+    - stun.*.*.*
+    - stun.*.*
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    - https://dns.google/dns-query
+  fallback:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+proxies:
+  - {name: 管理群内部专用@香港#8.14, server: xd.jiuzheit.com, port: 48201, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
+  - {name: 管理群内部专用@新加坡#8.14, server: cn.jiuzheit.com, port: 48202, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
+  - {name: 管理群内部专用@日本#8.14, server: xd.jiuzheit.com, port: 48210, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
+  - {name: A组@大阪#8.14*QQ群734923674, server: gyzz.feethree.xyz, port: 48989, type: vmess, uuid: 86a751af-28d1-4df2-a677-64c31a44a586, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /v2ray, headers: {Host: gcpau.feethree.top}}, udp: true}
+  - {name: A组@东京#8.14*QQ群734923674, server: gyzz.feethree.xyz, port: 61696, type: vmess, uuid: 86a751af-28d1-4df2-a677-64c31a44a586, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /v2ray, headers: {Host: www.anlocl.ga}}, udp: true}
+  - {name: B组@新加坡#8.14*QQ群734923674, server: 3.1.72.70, port: 10800, type: trojan, password: a3d99553-b666-4320-8a65-91f77e54d482, sni: ecsga.tgads123.com, skip-cert-verify: true, udp: true}
+  - {name: C组@香港#8.14*QQ群734923674, server: 20.255.56.107, port: 57920, type: vmess, uuid: f06e2069-3582-46bb-adb7-4e60d6ae0edf, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /}, udp: true}
+  - {name: 备用@香港#8.14*QQ群734923674, server: gdcm.r.swingones1.xyz, port: 44601, type: trojan, password: 402a4530-9652-4056-bffd-3de340d2f031, sni: cdn.qchwnd.moe, skip-cert-verify: true, udp: true}
+proxy-groups:
+  - name: 代理服务器
+    type: select
+    proxies:
+      - 自动选择
+      - 管理群内部专用@香港#8.14
+      - 管理群内部专用@新加坡#8.14
+      - 管理群内部专用@日本#8.14
+      - A组@大阪#8.14*QQ群734923674
+      - A组@东京#8.14*QQ群734923674
+      - B组@新加坡#8.14*QQ群734923674
+      - C组@香港#8.14*QQ群734923674
+      - 备用@香港#8.14*QQ群734923674
+    _index: 0
+  - name: 自动选择
+    type: url-test
+    proxies:
+      - 管理群内部专用@香港#8.14
+      - 管理群内部专用@新加坡#8.14
+      - 管理群内部专用@日本#8.14
+      - A组@大阪#8.14*QQ群734923674
+      - A组@东京#8.14*QQ群734923674
+      - B组@新加坡#8.14*QQ群734923674
+      - C组@香港#8.14*QQ群734923674
+      - 备用@香港#8.14*QQ群734923674
+    url: https://www.google.com/generate_204
+    interval: 120
+    #tolerance: 50
+    _index: 1
+rules:
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,proxy,代理服务器
+  - MATCH,代理服务器
+rule-providers:
+  proxy:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+  direct:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
+    path: ./ruleset/direct.yaml
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
+    path: ./ruleset/private.yaml
+    interval: 86400
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+  applications:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt
+    path: ./ruleset/applications.yaml
+    interval: 86400
