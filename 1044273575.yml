@@ -37,42 +37,45 @@ dns:
       - 0.0.0.0/32
       - 127.0.0.1/32
 proxies:
-  - {name: 管理群内部专用@香港#8.14, server: xd.jiuzheit.com, port: 48201, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
-  - {name: 管理群内部专用@新加坡#8.14, server: cn.jiuzheit.com, port: 48202, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
-  - {name: 管理群内部专用@日本#8.14, server: xd.jiuzheit.com, port: 48210, type: ss, cipher: chacha20-ietf-poly1305, password: 70bd2847-daae-4edc-971d-c4284c57919f, udp: true}
-  - {name: A组@大阪#8.14*QQ群734923674, server: gyzz.feethree.xyz, port: 48989, type: vmess, uuid: 86a751af-28d1-4df2-a677-64c31a44a586, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /v2ray, headers: {Host: gcpau.feethree.top}}, udp: true}
-  - {name: A组@东京#8.14*QQ群734923674, server: gyzz.feethree.xyz, port: 61696, type: vmess, uuid: 86a751af-28d1-4df2-a677-64c31a44a586, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /v2ray, headers: {Host: www.anlocl.ga}}, udp: true}
-  - {name: B组@新加坡#8.14*QQ群734923674, server: 3.1.72.70, port: 10800, type: trojan, password: a3d99553-b666-4320-8a65-91f77e54d482, sni: ecsga.tgads123.com, skip-cert-verify: true, udp: true}
-  - {name: C组@香港#8.14*QQ群734923674, server: 20.255.56.107, port: 57920, type: vmess, uuid: f06e2069-3582-46bb-adb7-4e60d6ae0edf, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /}, udp: true}
-  - {name: 备用@香港#8.14*QQ群734923674, server: gdcm.r.swingones1.xyz, port: 44601, type: trojan, password: 402a4530-9652-4056-bffd-3de340d2f031, sni: cdn.qchwnd.moe, skip-cert-verify: true, udp: true}
+  - {name: "[SS] QQ群：1044273575", server: 0.0.0.0, port: 1, type: ss, cipher: aes-128-gcm, password: !<str> 0, udp: true}
+  - {name: "[SS] 更新时间：2022年9月11日02点46分", server: 0.0.0.0, port: 1, type: ss, cipher: aes-128-gcm, password: !<str> 0, udp: true}
+  - {name: "[SS] 仅限群员自用", server: 0.0.0.0, port: 1, type: ss, cipher: aes-128-gcm, password: !<str> 0, udp: true}
+  - {name: 🇯🇵 A组@主日本#9.11*QQ群734923674, server: 139.226.50.202, port: 44616, type: trojan, password: 402a4530-9652-4056-bffd-3de340d2f031, sni: cdn.qchwnd.moe, skip-cert-verify: false, udp: true}
+  - {name: 🇯🇵 A组@备日本#9.11*QQ群734923674, server: 139.226.50.202, port: 44616, type: trojan, password: 92e19e2d-0f89-4979-aa34-c39a75530cca, sni: cdn.qchwnd.moe, skip-cert-verify: false, udp: true}
+  - {name: 🇸🇬 B组@新加坡#9.11*QQ群734923674, server: 18.141.219.60, port: 443, type: trojan, password: 707bb767-9006-492c-b1ca-0ec235adba2c, sni: cdn.0000000000000000xd.6641634715834932.me, skip-cert-verify: false, udp: true}
+  - {name: 🇯🇵 B组@日本#9.11*QQ群734923674, server: 15.168.3.156, port: 443, type: trojan, password: 707bb767-9006-492c-b1ca-0ec235adba2c, sni: cdn.0000000000000000jc.6641634715834932.me, skip-cert-verify: false, udp: true}
+  - {name: 🇭🇰 C组@香港#9.11*QQ群734923674, server: in03.my1188.org, port: 64078, type: vmess, uuid: 606d0390-e32a-3bc9-b89c-8a0d96234948, alterId: 0, cipher: auto, tls: true, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: hk-balancer.airport-v2.com}}, udp: true}
+  - {name: 🇯🇵 D组@主日本#9.11*QQ群734923674, server: 116.129.253.128, port: 20004, type: trojan, password: 5077af1e-1bdc-3295-9169-109a107ace96, sni: node.franxxllc.tech, skip-cert-verify: false, udp: true}
+  - {name: 🇭🇰 D组@备香港#9.11*QQ群734923674, server: 120.241.146.31, port: 20001, type: trojan, password: 5077af1e-1bdc-3295-9169-109a107ace96, sni: node.franxxllc.tech, skip-cert-verify: false, udp: true}
 proxy-groups:
   - name: 代理服务器
     type: select
     proxies:
       - 自动选择
-      - 管理群内部专用@香港#8.14
-      - 管理群内部专用@新加坡#8.14
-      - 管理群内部专用@日本#8.14
-      - A组@大阪#8.14*QQ群734923674
-      - A组@东京#8.14*QQ群734923674
-      - B组@新加坡#8.14*QQ群734923674
-      - C组@香港#8.14*QQ群734923674
-      - 备用@香港#8.14*QQ群734923674
+      - "[SS] QQ群：1044273575"
+      - "[SS] 更新时间：2022年9月11日02点46分"
+      - "[SS] 仅限群员自用"
+      - 🇯🇵 A组@主日本#9.11*QQ群734923674
+      - 🇯🇵 A组@备日本#9.11*QQ群734923674
+      - 🇸🇬 B组@新加坡#9.11*QQ群734923674
+      - 🇯🇵 B组@日本#9.11*QQ群734923674
+      - 🇭🇰 C组@香港#9.11*QQ群734923674
+      - 🇯🇵 D组@主日本#9.11*QQ群734923674
+      - 🇭🇰 D组@备香港#9.11*QQ群734923674
     _index: 0
   - name: 自动选择
     type: url-test
     proxies:
-      - 管理群内部专用@香港#8.14
-      - 管理群内部专用@新加坡#8.14
-      - 管理群内部专用@日本#8.14
-      - A组@大阪#8.14*QQ群734923674
-      - A组@东京#8.14*QQ群734923674
-      - B组@新加坡#8.14*QQ群734923674
-      - C组@香港#8.14*QQ群734923674
-      - 备用@香港#8.14*QQ群734923674
+      - 🇯🇵 A组@主日本#9.11*QQ群734923674
+      - 🇯🇵 A组@备日本#9.11*QQ群734923674
+      - 🇸🇬 B组@新加坡#9.11*QQ群734923674
+      - 🇯🇵 B组@日本#9.11*QQ群734923674
+      - 🇭🇰 C组@香港#9.11*QQ群734923674
+      - 🇯🇵 D组@主日本#9.11*QQ群734923674
+      - 🇭🇰 D组@备香港#9.11*QQ群734923674
     url: https://www.google.com/generate_204
-    interval: 120
-    #tolerance: 50
+    interval: 30
+    tolerance: 50
     _index: 1
 rules:
   - GEOIP,LAN,DIRECT
